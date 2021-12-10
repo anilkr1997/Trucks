@@ -161,7 +161,18 @@ new CountryFilter().publishResults(isim,new CountryFilter().performFiltering(isi
                 for (int i = 0, l = arralit.size()-1; i < l; i++) {
                     TransportModel.Datum country = arralit.get(i);
                     if (country.getTruckNumber().toUpperCase().contains(constraint))
-                        filteredItems.add(country);
+                        if(filteredItems.size()>0){
+                            for(int j=i;j<=filteredItems.size()-1;j++){
+                                if(!country.getTruckNumber().equals(filteredItems.get(j).getTruckNumber())){
+                                    filteredItems.add(country);
+                                    j--;
+                                }
+                            }
+                        }else {
+                            filteredItems.add(country);
+                        }
+                       // if(filteredItems.get(i).getTruckNumber()!=)
+
                     Log.e(TAG, "performFiltering: "+country.getTruckNumber() );
                 }
 
@@ -170,8 +181,8 @@ new CountryFilter().publishResults(isim,new CountryFilter().performFiltering(isi
                 result.values = filteredItems;
             } else {
                 synchronized (this) {
-                    result.values = arralit;
-                    result.count = arralit.size();
+                    result.values = search;
+                    result.count = search.size();
                 }
             }
             //Log.e(TAG, "performFiltering: res "+filteredItems.get(0).getTruckNumber() );
@@ -185,23 +196,17 @@ new CountryFilter().publishResults(isim,new CountryFilter().performFiltering(isi
             Log.e(TAG, "publishResults: res "+filterResults.count);
             if (filterResults.count > 0) {
                 arralit.clear();
-                for(int i=0;i<=filterResults.count;i++){
-                    arralit=(ArrayList<TransportModel.Datum>)filterResults.values;
 
-                }
+                arralit=(ArrayList<TransportModel.Datum>)filterResults.values;
 
 
                  Successfullygetalldata(arralit);
-                //  ListAdapter listAdapter=new ListviewAdopter(activity,R.layout.listviewlayout,filteredItems);
-                // arrayAdapter=new ListviewAdopter(HomeFragment.this.activity,R.layout.listviewlayout,search);
-                // listviewAdopter=new ListviewAdopter(HomeFragment.this.activity,R.layout.listviewlayout,search);
 
 
-                listviewAdopter.notifyDataSetChanged();
 
             } else {
                 Log.e(TAG, "publishResults: " );
-                Successfullygetalldata(search);
+               // Successfullygetalldata(search);
 
                 listviewAdopter.notifyDataSetInvalidated();
             }

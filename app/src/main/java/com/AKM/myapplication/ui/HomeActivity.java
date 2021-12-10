@@ -67,7 +67,6 @@ public class HomeActivity extends AppCompatActivity{
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
                 Log.e("TAG", "onQueryTextSubmit: "+query );
                 searchView.clearFocus();
                 return false;
@@ -76,7 +75,6 @@ public class HomeActivity extends AppCompatActivity{
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
 
                 sendData.gonder(newText);
 
