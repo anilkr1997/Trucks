@@ -130,7 +130,9 @@ if(chan){
         Fragment fragment;
         fragment = getSupportFragmentManager().findFragmentById(R.id.container);
       if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStackImmediate();
+           // getSupportFragmentManager().popBackStackImmediate();
+          //  chan=true;
+
         } else if (!(fragment instanceof OnBackPressedListener) || !((OnBackPressedListener) fragment).onBackPressed()) {
 
             super.onBackPressed();
