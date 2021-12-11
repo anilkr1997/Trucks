@@ -10,6 +10,7 @@ import java.util.List;
 public interface mvpcallback {
     interface Trackview extends BaseCallback.BaseView {
         void Successfullygetalldata(List<TransportModel.Datum> data);
+        void Successfullygetall(List<TransportModel.Datum> data);
     }
     interface TrackPrsent extends BaseCallback.BasePresenter {
         void Callalldata();

@@ -37,5 +37,6 @@ public class Truckprsent implements mvpcallback.TrackPrsent {
     @Override
     public void getSuccesfullyaalldata(List<TransportModel.Datum> data) {
          trackview.Successfullygetalldata(data);
+         trackview.Successfullygetall(data);
     }
 }

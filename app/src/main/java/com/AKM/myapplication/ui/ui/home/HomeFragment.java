@@ -33,6 +33,7 @@ import com.AKM.myapplication.ui.Mvpinterface.mvpcallback;
 import com.AKM.myapplication.ui.OnBackPressedListener;
 import com.AKM.myapplication.ui.Sendata;
 import com.AKM.myapplication.ui.dataclass.TransportModel;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,6 @@ public ListviewAdopter listviewAdopter;
  Context activity;
 Toolbar actionBar;
 
-ArrayAdapter<TransportModel.Datum> arrayAdapter;
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -125,9 +125,14 @@ ArrayAdapter<TransportModel.Datum> arrayAdapter;
         listView.setAdapter(listviewAdopter);
 
         listviewAdopter.notifyDataSetChanged();
-        search.addAll(data);
-        new MapsFragment(search);
+        new MapsFragment(arralit);
 
+
+    }
+
+    @Override
+    public void Successfullygetall(List<TransportModel.Datum> data) {
+        search.addAll(data);
 
     }
 
@@ -157,21 +162,14 @@ new CountryFilter().publishResults(isim,new CountryFilter().performFiltering(isi
             filteredItems = new ArrayList<TransportModel.Datum>();
 
             if (constraint!=null &&constraint.toString().length() > 0) {
-
+                filteredItems.clear();
                 for (int i = 0, l = arralit.size()-1; i < l; i++) {
                     TransportModel.Datum country = arralit.get(i);
                     if (country.getTruckNumber().toUpperCase().contains(constraint))
-                        if(filteredItems.size()>0){
-                            for(int j=i;j<=filteredItems.size()-1;j++){
-                                if(!country.getTruckNumber().equals(filteredItems.get(j).getTruckNumber())){
-                                    filteredItems.add(country);
-                                    j--;
-                                }
-                            }
-                        }else {
-                            filteredItems.add(country);
-                        }
-                       // if(filteredItems.get(i).getTruckNumber()!=)
+
+                    filteredItems.add(country);
+
+                    // if(filteredItems.get(i).getTruckNumber()!=)
 
                     Log.e(TAG, "performFiltering: "+country.getTruckNumber() );
                 }
@@ -206,7 +204,6 @@ new CountryFilter().publishResults(isim,new CountryFilter().performFiltering(isi
 
             } else {
                 Log.e(TAG, "publishResults: " );
-               // Successfullygetalldata(search);
 
                 listviewAdopter.notifyDataSetInvalidated();
             }
@@ -215,20 +212,7 @@ new CountryFilter().publishResults(isim,new CountryFilter().performFiltering(isi
 
     }
 
-    @SuppressLint("ResourceType")
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.home, menu);
 
-
-
-        MenuItem menuItem1=menu.findItem(R.id.action_map).setVisible(false);
-        MenuItem menuItem=menu.findItem(R.id.action_search).setVisible(false);
-
-
-
-        super.onCreateOptionsMenu(menu, inflater);
-    }
 
 
 }
