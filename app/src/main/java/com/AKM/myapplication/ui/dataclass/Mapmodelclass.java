@@ -11,17 +11,17 @@ public class Mapmodelclass {
     @SerializedName("truckRunningState")
     @Expose
     private Integer truckRunningState;
-//    @SerializedName("lat")
-//    @Expose
-//    private Double lat;
-//    @SerializedName("lng")
-//    @Expose
-//    private Double lng;
+    @SerializedName("truckNumber")
+    @Expose
+    private String trucknumber;
+
+
     private LatLng location;
 
-    public Mapmodelclass(Long stopStartTime, Integer truckRunningState, LatLng location, Boolean ignitionOn, Long createTime) {
+    public Mapmodelclass(Long stopStartTime, Integer truckRunningState, String trucknumber, LatLng location, Boolean ignitionOn, Long createTime) {
         this.stopStartTime = stopStartTime;
         this.truckRunningState = truckRunningState;
+        this.trucknumber = trucknumber;
         this.location = location;
         this.ignitionOn = ignitionOn;
         this.createTime = createTime;
@@ -90,4 +90,13 @@ public class Mapmodelclass {
     public void setLocation(LatLng location) {
         this.location = location;
     }
+
+    public String getTrucknumber() {
+        return trucknumber;
+    }
+
+    public void setTrucknumber(String trucknumber) {
+        this.trucknumber = trucknumber;
+    }
 }
+

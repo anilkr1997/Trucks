@@ -35,7 +35,7 @@ List<Mapmodelclass> location=new ArrayList<>() ;
         for(int i=0;i<=arralit.size()-1;i++){
             LatLng sayd=new LatLng(arralit.get(i).getLastWaypoint().getLat(),arralit.get(i).getLastWaypoint().getLng());
 
-            location.add(new Mapmodelclass(arralit.get(i).getLastRunningState().getStopStartTime(),arralit.get(i).getLastRunningState().getTruckRunningState(),sayd,arralit.get(i).getLastWaypoint().getIgnitionOn(),arralit.get(i).getLastWaypoint().getCreateTime()));
+            location.add(new Mapmodelclass(arralit.get(i).getLastRunningState().getStopStartTime(),arralit.get(i).getLastRunningState().getTruckRunningState(), arralit.get(i).getTruckNumber(), sayd,arralit.get(i).getLastWaypoint().getIgnitionOn(),arralit.get(i).getLastWaypoint().getCreateTime()));
         }
        // mapFragment.getMapAsync(this);
     }
@@ -88,7 +88,7 @@ List<Mapmodelclass> location=new ArrayList<>() ;
             }else if(location.get(i).getTruckRunningState()==0 && location.get(i).getIgnitionOn()){
                 imagere=R.drawable.yellow;
             }
-            googleMap.addMarker(new MarkerOptions().position(location.get(i).getLocation()).title("anil").icon(uttil.bitmapDescriptorFromVector(this.getActivity(),imagere)).infoWindowAnchor(0.5f, 0.5f));
+            googleMap.addMarker(new MarkerOptions().position(location.get(i).getLocation()).title(location.get(i).getTrucknumber()).icon(uttil.bitmapDescriptorFromVector(this.getActivity(),imagere)).infoWindowAnchor(0.5f, 0.5f));
             googleMap.animateCamera(CameraUpdateFactory.zoomTo(50.0f));
 
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(location.get(i).getLocation()));

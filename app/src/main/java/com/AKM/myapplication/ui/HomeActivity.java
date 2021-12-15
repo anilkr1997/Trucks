@@ -25,7 +25,7 @@ public class HomeActivity extends AppCompatActivity{
     private Toolbar actionBar;
     FloatingActionButton fab;
     boolean chan=true;
-
+  MenuItem menuItem;
     public Sendata sendData;
     public void setSendData(Sendata sendData){     //create setter for interface
         this.sendData = sendData;
@@ -61,7 +61,7 @@ public class HomeActivity extends AppCompatActivity{
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
-        MenuItem menuItem=menu.findItem(R.id.action_search);
+         menuItem=menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -96,10 +96,12 @@ public class HomeActivity extends AppCompatActivity{
 if(chan){
     Uttil.setFragment(MapsFragment.newInstance(HomeFragment.search), false, this, R.id.nav_host_fragment_content_home);
     item.setIcon(R.drawable.ic_baseline_list_24);
+menuItem.setVisible(false);
 
     chan=false;
 }else {
     item.setIcon(R.drawable.maps);
+    menuItem.setVisible(true);
     chan =true;
     Uttil.setFragment(HomeFragment.newInstance(this), true, this, R.id.nav_host_fragment_content_home);
 
